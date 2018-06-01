@@ -15,8 +15,9 @@ const ui = {
                             rows:[
                                 {
                                     view: 'template',
-                                    type: 'section',
-                                    template: 'BOUNTY: a new project name for TangoWebapp'
+                                    type: 'header',
+                                    height: 80,
+                                    template: '<h2>Suggest your new project name for TangoWebapp</h2>'
                                 },
                                 {
                                     id: 'data',
