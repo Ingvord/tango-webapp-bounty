@@ -23,9 +23,12 @@ const ui = {
                                     view: 'datatable',
                                     editable: true,
                                     columns: [
+                                        {id: 'id', hidden: true},
                                         {id: 'user', width: 250},
                                         {id: 'value', editor: 'text',fillspace: true}
-                                    ]
+                                    ],
+                                    url: 'data.jsp',
+                                    save:'data.jsp'
                                 },
                                 {
                                     id:'frm',
@@ -52,8 +55,9 @@ const ui = {
                                             value: 'Submit',
                                             click:function(){
                                                 const form = this.getFormView();
-                                                if(form.validate())
+                                                if(form.validate()) {
                                                     form.save();
+                                                }
                                             }
                                         }
                                     ]

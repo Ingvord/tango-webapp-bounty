@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="tango-webapp-bounty">
+    <output-path>$PROJECT_DIR$/out/artifacts/tango_webapp_bounty</output-path>
+    <root id="root">
+      <element id="dir-copy" path="$PROJECT_DIR$" />
+    </root>
+  </artifact>
+</component>
