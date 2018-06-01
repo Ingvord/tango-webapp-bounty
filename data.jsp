@@ -24,6 +24,21 @@
     String method = request.getMethod();
 
     switch(method){
+        case "POST":
+            String user = request.getParameter("user");
+            String value = request.getParameter("value");
+            String webix_operation = request.getParameter("webix_operation");
+            StringBuilder json = new StringBuilder();
+            String id = request.getParameter("id");
+            json
+                .append("{\"id\":").append(id)
+                .append(",\"user\":\"").append(user)
+                .append("\",\"value\":\"").append(value).append("\"}");
+
+            if(webix_operation.equalsIgnoreCase("delete"))
+                storage.remove(id);
+            else
+                storage.put(id, json.toString());
         case "GET":
             //enable gzip
             response.setHeader("Content-Encoding", "gzip");
@@ -31,19 +46,6 @@
             PrintWriter outWriter = new PrintWriter(new GZIPOutputStream(outA), false);
             outWriter.print(Arrays.toString(storage.values().toArray()));
             outWriter.close();
-            break;
-        case "POST":
-            String user = request.getParameter("user");
-            String value = request.getParameter("value");
-
-            StringBuilder json = new StringBuilder();
-            json
-            .append("{\"id\":").append(System.currentTimeMillis())
-            .append(",\"user\":\"").append(user)
-            .append("\",\"value\":\"").append(value).append("\"}");
-
-            storage.put(user, json.toString());
-            storage.remove(user, null);
             break;
     }
 %>

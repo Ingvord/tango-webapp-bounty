@@ -21,19 +21,36 @@ const ui = {
                                 {
                                     id: 'data',
                                     view: 'datatable',
+                                    select: true,
                                     editable: true,
                                     columns: [
                                         {id: 'id', hidden: true},
                                         {id: 'user', width: 250},
-                                        {id: 'value', editor: 'text',fillspace: true}
+                                        {id: 'value', editor: 'text',fillspace: true},
+                                        {id: 'remove', header: '',template:function(obj){return "<span class='webix_icon fa-trash remove'/>"}, width: 40}
                                     ],
                                     url: 'data.jsp',
-                                    save:'data.jsp'
+                                    save:'data.jsp',
+                                    onClick: {
+                                        'remove':function(ev, obj){
+                                            this.remove(obj.row);
+                                        }
+                                    }
                                 },
                                 {
                                     id:'frm',
                                     view: 'form',
                                     elements:[
+                                        {
+                                            view:'text',
+                                            name: 'id',
+                                            hidden: true
+                                        },
+                                        {
+                                            view:'text',
+                                            name: 'webix_operation',
+                                            hidden: true
+                                        },
                                         {
                                             view:'text',
                                             name: 'user',
@@ -56,7 +73,14 @@ const ui = {
                                             click:function(){
                                                 const form = this.getFormView();
                                                 if(form.validate()) {
-                                                    form.save();
+                                                    if(!form.elements['id'].getValue())
+                                                        form.elements['id'].setValue(webix.uid());
+                                                    form.elements['webix_operation'].setValue('insert');
+                                                    // form.save();
+
+                                                    webix.ajax().post("data.jsp", form.getValues(), function(response, xhr) {
+                                                        $$('data').parse(xhr.json())
+                                                    });
                                                 }
                                             }
                                         }
