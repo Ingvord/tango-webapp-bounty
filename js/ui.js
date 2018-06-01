@@ -5,7 +5,10 @@
  */
 const ui = {
             rows:[
-                {},
+                {
+                    borderless:true,
+                    template: '<img width="25%" style="display: block; margin: 0 auto" src="images/tango_in_color.png">'
+                },
                 {
                     gravity: 4,
                     cols:[
@@ -27,7 +30,7 @@ const ui = {
                                     columns: [
                                         {id: 'id', hidden: true},
                                         {id: 'user', width: 250},
-                                        {id: 'value', editor: 'text',fillspace: true},
+                                        {id: 'value', header:'Suggestion', editor: 'text',fillspace: true},
                                         {id: 'remove', header: '',template:function(obj){return "<span class='webix_icon fa-trash remove'/>"}, width: 40}
                                     ],
                                     url: 'data.jsp',
@@ -57,12 +60,14 @@ const ui = {
                                             name: 'user',
                                             label: 'User',
                                             required:true,
+                                            labelWidth:100,
                                             invalidMessage:"Can not be empty"
                                         },
                                         {
                                             view: 'text',
                                             name: 'value',
-                                            label: 'Value',
+                                            label: 'Suggestion',
+                                            labelWidth:100,
                                             required:true,
                                             invalidMessage:"Can not be empty"
                                         },
