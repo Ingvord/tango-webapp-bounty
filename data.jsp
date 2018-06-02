@@ -27,13 +27,16 @@
         case "POST":
             String user = request.getParameter("user");
             String value = request.getParameter("value");
+            String votes = request.getParameter("votes");
             String webix_operation = request.getParameter("webix_operation");
             StringBuilder json = new StringBuilder();
             String id = request.getParameter("id");
+            //{"id":1234567,"user":"name","votes":0,"value":"submit"}
             json
                 .append("{\"id\":").append(id)
                 .append(",\"user\":\"").append(user)
-                .append("\",\"value\":\"").append(value).append("\"}");
+                .append("\",\"votes\":").append(votes)
+                .append(",\"value\":\"").append(value).append("\"}");
 
             if(webix_operation.equalsIgnoreCase("delete"))
                 storage.remove(id);
